@@ -6,6 +6,7 @@ import it.plansoft.classmanager.model.Class;
 
 
 @Repository
+
 public interface ClassRepository extends JpaRepository<Class, Long>{
 
 }
