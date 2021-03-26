@@ -1,4 +1,4 @@
-package it.plansoft.model;
+*package it.plansoft.classmanager.model;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
