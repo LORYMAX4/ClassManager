@@ -7,7 +7,7 @@ import it.plansoft.classmanager.service.StudentService;
 import it.plansoft.model.Student;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/students")
 public class StudentController extends BaseCrudController<StudentService, Student, Long> {
 
 	public StudentController(StudentService service) {
