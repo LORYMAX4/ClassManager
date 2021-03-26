@@ -9,7 +9,7 @@ import it.plansoft.classmanager.service.ClassService;
 import it.plansoft.classmanager.model.Class;
 
 @RestController
-@RequestMapping("/course")
+@RequestMapping("/classes")
 public class ClassController extends BaseCrudController<ClassService, Class, Long> {
 
 
