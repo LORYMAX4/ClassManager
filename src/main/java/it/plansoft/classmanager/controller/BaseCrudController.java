@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import it.plansoft.classmanager.service.BaseCrudService;
-import it.plansoft.model.IDModel;
+import it.plansoft.classmanager.model.IDModel;
 
 public abstract class BaseCrudController<SERVICE extends BaseCrudService, MODEL extends IDModel<ID>, ID>
 		implements ICrudController<MODEL, ID> {

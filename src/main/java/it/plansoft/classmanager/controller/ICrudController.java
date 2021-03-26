@@ -13,7 +13,5 @@ public interface ICrudController<MODEL, ID> extends IController {
 	
 	public MODEL add(MODEL model);
 	
-	public void delete(MODEL model);
-	
 	public void deleteById(ID id);
 }
