@@ -19,7 +19,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "class")
+@Table(name = "classes")
 public class Class extends IDModel<Long> {
 
 	@Id
@@ -56,6 +56,7 @@ public class Class extends IDModel<Long> {
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "classId")
 	@JsonIgnore
     private Set<Student> students;

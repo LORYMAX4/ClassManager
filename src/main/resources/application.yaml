@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    #active: sqlite
+    active: mysql
+    #active: postgres
+
+server:
+  port: 8081
+  servlet:
+    contextPath: /classmanager
+
+hibernate:
+  hbm2ddl:
+    auto: none
+  show-sql: true
