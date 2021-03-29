@@ -8,57 +8,45 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 
-@Data
 @Entity
 @Table(name = "classes")
-public class Class extends IDModel<Long> {
+public class Classroom extends IDModel<Long> {
 
 	@Id
-	@Column(name = "class_id")
+	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "name", nullable = false)
+	@Column(name = "NAME", nullable = false)
 	private String name;
-	@Column(name = "grade", nullable = false)
+	@Column(name = "GRADE", nullable = false)
 	private int grade;
 
-	public Class() {
-		super();
+	@OneToMany(mappedBy = "classroom")
+	private Set<Student> students;
+
+	public Classroom() {
 	}
 
-	public Class(String name, int grade) {
+	public Classroom(String name, int grade) {
 		this.name = name;
 		this.grade = grade;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public int getGrade() {
 		return grade;
 	}
-
-	public void setGrade(int grade) {
-		this.grade = grade;
-	}
-	
-	//@OneToMany(cascade = CascadeType.ALL)
-	//@JsonIgnore
-    //private Set<Student> students;
-
 }

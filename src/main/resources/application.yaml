@@ -3,7 +3,7 @@ spring:
     active: mysql
 
 server:
-  port: 8081
+  port: 8080
   servlet:
     contextPath: /classmanager
 
