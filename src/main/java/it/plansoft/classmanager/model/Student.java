@@ -14,24 +14,23 @@ import lombok.NoArgsConstructor;
 public class Student extends IDModel<Long> {
 
 	@Id
-	@Column(name = "student_id")
+	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "name", nullable = false)
+	@Column(name = "NAME", nullable = false)
 	private String name;
 
-	@Column(name = "last_name", nullable = false)
+	@Column(name = "SURNAME", nullable = false)
 	private String lastName;
 
-	@Column(name = "sidi_code", nullable = false)
+	@Column(name = "SIDI_CODE", nullable = false)
 	private String sidiCode;
 
-	@Column(name = "tax_code", nullable = false)
+	@Column(name = "TAX_CODE", nullable = false)
 	private String taxCode;
 	
-	@ManyToOne
-	@JoinColumn(name = "class_id")
-	private Class classId;
-
+	//@ManyToOne
+	//@JoinColumn(name = "CLASS_ID")
+	//private Class classId;
 }

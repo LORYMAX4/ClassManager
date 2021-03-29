@@ -1,8 +1,6 @@
 spring:
   profiles:
-    #active: sqlite
     active: mysql
-    #active: postgres
 
 server:
   port: 8081

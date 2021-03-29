@@ -57,8 +57,8 @@ public class Class extends IDModel<Long> {
 		this.grade = grade;
 	}
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "classId")
-	@JsonIgnore
-    private Set<Student> students;
+	//@OneToMany(cascade = CascadeType.ALL)
+	//@JsonIgnore
+    //private Set<Student> students;
 
 }

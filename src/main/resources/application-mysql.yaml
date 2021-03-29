@@ -3,7 +3,7 @@ spring:
     hikari:
       connectionTimeout: 20000
       maximumPoolSize: 5
-    url: jdbc:mysql://localhost:3306/classmanager.sql
+    url: jdbc:mysql://localhost:3306/classmanager
     username: root
     password: root
   jpa:
