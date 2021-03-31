@@ -4,6 +4,14 @@
 
 **Data emissione** : 31 marzo 2021
 
+## Indice
+- [Gruppo di lavoro](#gruppo-di-lavoro)
+- [Scopo del progetto](#scopo-del-progetto)
+- [Richieste implementative](#richieste-implementative)
+- [Modello E/R](#modello-entità-relazione)
+- [Endpoint](#endpoint)
+- [Implementazione](#implementazione)
+
 ## Gruppo di lavoro
 - [PlanSoft](https://www.plansoft.it/) (Cliente e PM)
 - [Leonardo Morganti](https://github.com/Leomorga) (Sviluppatore)
@@ -28,7 +36,7 @@ Gli oggetti che dobbiamo trattare sono:
 Inoltre gli oggetti sono collegati in questo modo:
 - Una classe è composta da più studenti.
 
-## Modello E/R
+## Modello Entità Relazione
 ![unnamed (2)](https://user-images.githubusercontent.com/51908859/113143311-480d9c80-922c-11eb-9d4f-23f16bc941a6.png)
 
 Studente(id, nome, cognome, codice fiscale, SIDI_CODE, classroom)
@@ -36,6 +44,9 @@ Studente(id, nome, cognome, codice fiscale, SIDI_CODE, classroom)
 Classe(id, nome, grado)
 
 ## Endpoint
+- [Studenti](#studenti)
+- [Classi](#classi)
+
 ### Studenti
 - Get Lista studenti= `/classmanager/students`
 ```
@@ -121,7 +132,7 @@ Classe(id, nome, grado)
 ### Tecnologie/Linguaggi utilizzati
 **Backend**
 - Java
-  - Linguaggio di programmazione utilizzato per lo sviluppo dell’applicazione tramite il framework Spring.
+   - Linguaggio di programmazione utilizzato per lo sviluppo dell’applicazione tramite il framework Spring.
 - Spring
   - Framework utilizzato per lo sviluppo di web application, quindi collegamento al database(MySql) ed esposizione delle API.
 - Maven
