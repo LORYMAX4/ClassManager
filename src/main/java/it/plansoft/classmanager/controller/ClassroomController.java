@@ -1,0 +1,31 @@
+package it.plansoft.classmanager.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import it.plansoft.classmanager.model.Classroom;
+import it.plansoft.classmanager.service.ClassroomService;
+
+@RestController
+@RequestMapping("/classroom")
+public class ClassroomController {
+
+	@Autowired
+	private ClassroomService service;
+	
+	@GetMapping("/")
+	public List<Classroom> getAll() {
+		return service.findAll();
+	}
+
+	@GetMapping("/{id}")
+	public Optional<Classroom> getById(@PathVariable Long id) {
+		return service.findById(id);
+	}
+}

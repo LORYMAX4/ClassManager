@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: mysql
+
+server:
+  port: 8080
+  servlet:
+    contextPath: /classmanager
+
+hibernate:
+  hbm2ddl:
+    auto: none
+  show-sql: true

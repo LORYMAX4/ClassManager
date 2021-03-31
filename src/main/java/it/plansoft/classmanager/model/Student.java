@@ -2,36 +2,69 @@ package it.plansoft.classmanager.model;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity(name = "Students")
+@Entity
 @Table(name = "students")
 public class Student extends IDModel<Long> {
 
 	@Id
-	@Column(name = "student_id")
+	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "name", nullable = false)
+	@Column(name = "NAME", nullable = false)
 	private String name;
 
-	@Column(name = "last_name", nullable = false)
+	@Column(name = "SURNAME", nullable = false)
 	private String lastName;
 
-	@Column(name = "sidi_code", nullable = false)
+	@Column(name = "SIDI_CODE", nullable = false)
 	private String sidiCode;
 
-	@Column(name = "tax_code", nullable = false)
+	@Column(name = "TAX_CODE", nullable = false)
 	private String taxCode;
-	
-	@ManyToOne
-	@JoinColumn(name = "class_id")
-	private Class classId;
 
+	@ManyToOne()
+	@JoinColumn(name = "CLASS_ID", nullable = false)
+	private Classroom classroom;
+
+	public Student() {
+	}
+
+	public Student(Long id, String name, String lastName, String sidiCode, String taxCode, Classroom classroom) {
+		this.id = id;
+		this.name = name;
+		this.lastName = lastName;
+		this.sidiCode = sidiCode;
+		this.taxCode = taxCode;
+		this.classroom = classroom;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getSidiCode() {
+		return sidiCode;
+	}
+
+	public String getTaxCode() {
+		return taxCode;
+	}
+
+	public Classroom getClassroom() {
+		return classroom;
+	}
+	
 }
