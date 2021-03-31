@@ -1,4 +1,5 @@
-                                                                                                         Documento di analisi
+<p align="right">Documento di analisi</p>
+
 ![plansoft-icon-1 (1)](https://user-images.githubusercontent.com/51908859/113130686-a16dcf80-921c-11eb-9e65-a0821a6aab71.png)
 
 # ClassManager
@@ -30,3 +31,6 @@ Inoltre gli oggetti sono collegati in questo modo:
 - Una classe è composta da più studenti.
 
 ## Modello E/R
+![unnamed (2)](https://user-images.githubusercontent.com/51908859/113143311-480d9c80-922c-11eb-9d4f-23f16bc941a6.png)
+
+
