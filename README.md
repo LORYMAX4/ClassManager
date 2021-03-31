@@ -1,5 +1,3 @@
-<p align="right">Documento di analisi</p>
-
 ![plansoft-icon-1 (1)](https://user-images.githubusercontent.com/51908859/113130686-a16dcf80-921c-11eb-9e65-a0821a6aab71.png)
 
 # ClassManager
@@ -33,4 +31,89 @@ Inoltre gli oggetti sono collegati in questo modo:
 ## Modello E/R
 ![unnamed (2)](https://user-images.githubusercontent.com/51908859/113143311-480d9c80-922c-11eb-9d4f-23f16bc941a6.png)
 
+Studente(id, nome, cognome, codice fiscale, SIDI_CODE, classroom)
+
+Classe(id, nome, grado)
+
+## Endpoint
+### Studenti
+- Get Lista studenti= `/classmanager/students`
+```
+[
+  {
+    id: 1,
+    name: "Lorenzo",
+    surname: "Merlini",
+    taxCode: “AAAAAA99A99A999A”,
+    sidiCode: “99999999”,
+    classroom: 1
+  },
+  {
+    id: 2,
+    name: "Mario",
+    surname: "Rossi",
+    taxCode: “BBBBBB77B77B777B”,
+    sidiCode: “77777777”,
+    classroom: 2
+  }
+]
+```
+- Get Studente = `/classmanager/students/{id}`
+```
+{
+  id: 1,
+  name: "Lorenzo",
+  surname: "Merlini",
+  taxCode: “AAAAAA99A99A999A”,
+  sidiCode: “99999999”,
+  classroom: 1
+}
+```
+- POST Studente = `/classmanager/students/`
+```
+{
+  id: 1,
+  name: "Lorenzo",
+  surname: "Merlini",
+  taxCode: “AAAAAA99A99A999A”,
+  sidiCode: “99999999”,
+  classroom: 1
+}
+```
+- PUT Studente = `/classmanager/students/{id}`
+```
+{
+  name: "Lorenzo",
+  surname: "Merlini",
+  taxCode: “AAAAAA99A99A999A”,
+  sidiCode: “99999999”,
+  classroom: 1
+}
+```
+- DELETE Studente = `/classmanager/students/{id}`
+
+### Classi
+- GET Lista classi = `/classmanager/classroom/`
+```
+[
+  {
+    id: 1,
+    grade: 1,
+    name: “NEE”
+  },
+  {
+    id: 2,
+    grade: 1,
+    name: “DMME”
+  }
+]
+```
+- GET classe = `/classmanager/classroom/{id}`
+```
+{
+  id: 1,
+  grade: 1,
+  name: “NEE”
+}
+```
 
