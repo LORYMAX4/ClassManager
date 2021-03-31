@@ -117,3 +117,14 @@ Classe(id, nome, grado)
 }
 ```
 
+## Implementazione
+### Tecnologie/Linguaggi utilizzati
+**Backend**
+- Java
+  - Linguaggio di programmazione utilizzato per lo sviluppo dell’applicazione tramite il framework Spring.
+- Spring
+  - Framework utilizzato per lo sviluppo di web application, quindi collegamento al database(MySql) ed esposizione delle API.
+- Maven
+  - Strumento utilizzato per facilitare la gestione delle dipendenze utilizzando il file pom.xml.
+- Postman
+  - Strumento utilizzato per verificare il corretto funzionamento delle API realizzate.
