@@ -1,5 +1,56 @@
-function Students() {
-  return (<div>Students</div>);
+import { Text, IconButton } from "@chakra-ui/react"
+import { SimpleGrid, Box } from "@chakra-ui/react"
+import { FaPencilAlt, FaSearch, FaTimes, FaUser } from 'react-icons/fa';
+
+
+function Students(props) {
+  let students = [];
+
+  for (let i = 0; i < props.data.length; i++) {
+    let student = props.data[i];
+    students.push((
+      <Box className="card">
+        <SimpleGrid columns={2} spacing={5}>
+          <Box>
+            <IconButton icon={<FaUser />} />
+            <h3 style={{marginLeft: '10px', display: 'inline-block'}}>{student.name} {student.surname}</h3>
+            <p><small>{student.taxCode}</small></p>
+          </Box>
+          <Box style={{textAlign: "right"}}>
+            <IconButton bg="blue.400" color="white" marginRight={3} aria-label="Get" icon={<FaSearch />} />
+            <IconButton bg="green.400" color="white" marginRight={3} aria-label="Update" icon={<FaPencilAlt />} />
+            <IconButton bg="red.400" color="white" aria-label="Delete" icon={<FaTimes />} />
+          </Box>
+        </SimpleGrid>
+      </Box>
+    ));
+  }
+
+  return (
+      <div>
+        <Text fontSize="2em" align="center">Students</Text>
+        <SimpleGrid columns={1} spacing={1}>
+          {students}
+        </SimpleGrid>
+      </div>
+    );
+  }
+  
+export async function getStaticProps(context) {
+  const res = await fetch(`http://localhost:3100/classes/1`)
+  let data = await res.json()
+
+  if (!data) {
+    return {
+      notFound: true,
+    }
+  }
+
+  data = data.students || data;
+
+  return {
+    props: { data }, // will be passed to the page component as props
+  }
 }
 
 export default Students;
