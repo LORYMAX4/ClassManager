@@ -22,7 +22,7 @@ export default function Home() {
         </p>
 
         <SimpleGrid columns={2} spacing={10}>
-          <Box className={styles.card}>
+          <Box className="card">
             <Link href="/classrooms">
               <a>
                 <h3>Classi &rarr;</h3>
@@ -30,7 +30,7 @@ export default function Home() {
               </a>
             </Link>
           </Box>
-          <Box className={styles.card}>
+          <Box className="card">
             <Link href="/students">
               <a>
                 <h3>Studenti &rarr;</h3>
