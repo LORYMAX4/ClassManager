@@ -1,7 +1,7 @@
-import { Text, IconButton } from "@chakra-ui/react"
+import { Text, IconButton, Container } from "@chakra-ui/react"
 import { SimpleGrid, Box } from "@chakra-ui/react"
+import Link from "next/link";
 import { FaPencilAlt, FaSearch, FaTimes, FaUser } from 'react-icons/fa';
-
 
 function Students(props) {
   let students = [];
@@ -17,7 +17,9 @@ function Students(props) {
             <p><small>{student.taxCode}</small></p>
           </Box>
           <Box style={{textAlign: "right"}}>
-            <IconButton bg="blue.400" color="white" marginRight={3} aria-label="Get" icon={<FaSearch />} />
+            <Link href={"/students/" + student.id}>
+              <IconButton bg="blue.400" color="white" marginRight={3} aria-label="Get" icon={<FaSearch />} />
+            </Link>
             <IconButton bg="green.400" color="white" marginRight={3} aria-label="Update" icon={<FaPencilAlt />} />
             <IconButton bg="red.400" color="white" aria-label="Delete" icon={<FaTimes />} />
           </Box>
@@ -27,12 +29,12 @@ function Students(props) {
   }
 
   return (
-      <div>
+      <Container maxW="2xl" centerContent>
         <Text fontSize="2em" align="center">Students</Text>
         <SimpleGrid columns={1} spacing={1}>
           {students}
         </SimpleGrid>
-      </div>
+      </Container>
     );
   }
   
