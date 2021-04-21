@@ -21,7 +21,7 @@
 ## Scopo del progetto
 Viene richiesta la creazione della parte di backend per la gestione degli studenti all'interno delle proprie classi. Le funzionalità che saranno implementate sono le seguenti:
 
-- Visualizzazione di tutti o di un singolo dipendente.
+- Visualizzazione di tutti o di un singolo studente.
 - Inserimento, modifica e cancellazione di un determinato studente.
 - Visualizzazione di tutte o di una singola classe.
 
@@ -55,16 +55,16 @@ Classe(id, nome, grado)
     id: 1,
     name: "Lorenzo",
     surname: "Merlini",
-    taxCode: “AAAAAA99A99A999A”,
-    sidiCode: “99999999”,
+    taxCode: "AAAAAA99A99A999A",
+    sidiCode: "99999999",
     classroom: 1
   },
   {
     id: 2,
     name: "Mario",
     surname: "Rossi",
-    taxCode: “BBBBBB77B77B777B”,
-    sidiCode: “77777777”,
+    taxCode: "BBBBBB77B77B777B",
+    sidiCode: "77777777",
     classroom: 2
   }
 ]
@@ -75,8 +75,8 @@ Classe(id, nome, grado)
   id: 1,
   name: "Lorenzo",
   surname: "Merlini",
-  taxCode: “AAAAAA99A99A999A”,
-  sidiCode: “99999999”,
+  taxCode: "AAAAAA99A99A999A",
+  sidiCode: "99999999",
   classroom: 1
 }
 ```
@@ -86,8 +86,8 @@ Classe(id, nome, grado)
   id: 1,
   name: "Lorenzo",
   surname: "Merlini",
-  taxCode: “AAAAAA99A99A999A”,
-  sidiCode: “99999999”,
+  taxCode: "AAAAAA99A99A999A",
+  sidiCode: "99999999",
   classroom: 1
 }
 ```
@@ -96,8 +96,8 @@ Classe(id, nome, grado)
 {
   name: "Lorenzo",
   surname: "Merlini",
-  taxCode: “AAAAAA99A99A999A”,
-  sidiCode: “99999999”,
+  taxCode: "AAAAAA99A99A999A",
+  sidiCode: "99999999",
   classroom: 1
 }
 ```
@@ -110,12 +110,12 @@ Classe(id, nome, grado)
   {
     id: 1,
     grade: 1,
-    name: “NEE”
+    name: "NEE"
   },
   {
     id: 2,
     grade: 1,
-    name: “DMME”
+    name: "DMME"
   }
 ]
 ```
@@ -124,7 +124,7 @@ Classe(id, nome, grado)
 {
   id: 1,
   grade: 1,
-  name: “NEE”
+  name: "NEE"
 }
 ```
 
