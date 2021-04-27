@@ -4,8 +4,8 @@ spring:
       connectionTimeout: 20000
       maximumPoolSize: 5
     url: jdbc:mysql://localhost:3306/classmanager
-    username: root
-    password: root
+    username: admin
+    password: admin
   jpa:
     hibernate:
       ddl-auto: update
@@ -14,3 +14,5 @@ spring:
         hibernate:
           format_sql: true
           dialect: org.hibernate.dialect.MySQL5Dialect
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
