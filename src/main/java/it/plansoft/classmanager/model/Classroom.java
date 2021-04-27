@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "classrooms")
+@Table(name = "CLASSES")
 public class Classroom extends IDModel<Long> {
 
 	@Id
