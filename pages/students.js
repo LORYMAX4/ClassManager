@@ -1,15 +1,34 @@
-import { Text, IconButton, Container } from "@chakra-ui/react"
+import {
+	Text, IconButton, Container, useDisclosure, Button,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalFooter,
+	ModalBody,
+	ModalCloseButton,
+} from "@chakra-ui/react"
 import { SimpleGrid, Box } from "@chakra-ui/react"
 import Link from "next/link";
 import { FaPencilAlt, FaSearch, FaTimes, FaUser } from 'react-icons/fa';
+import modelStudent from "./students/modelStudent"
+import StudentForm from "./students/studentForm";
+import {useState} from "react"
 
-function Students(props) {
+
+const Students = (props) => {
+	const { isOpen, onOpen, onClose } = useDisclosure()
 	let students = [];
+	let ms = { isOpen: false };
 
-	for (let i = 0; i < props.data.length; i++) {
+	const [formId, setstate] = useState(-1)
+
+	//let formId = -1;
+
+	for (let i = 0; i < 50; i++) {
 		let student = props.data[i];
 		students.push((
-			<Box className="card">
+			<Box key={i} className="card">
 				<SimpleGrid columns={2} spacing={5}>
 					<Box>
 						<IconButton icon={<FaUser />} />
@@ -20,7 +39,7 @@ function Students(props) {
 						<Link href={"/students/" + student.id}>
 							<IconButton bg="blue.400" color="white" marginRight={3} aria-label="Get" icon={<FaSearch />} />
 						</Link>
-						<IconButton bg="green.400" color="white" marginRight={3} aria-label="Update" icon={<FaPencilAlt />} />
+						<IconButton bg="green.400" color="white" marginRight={3} aria-label="Update" icon={<FaPencilAlt />} onClick={() => { setstate(student.id); onOpen(); }} />
 						<IconButton bg="red.400" color="white" aria-label="Delete" icon={<FaTimes />} />
 					</Box>
 				</SimpleGrid>
@@ -34,6 +53,23 @@ function Students(props) {
 			<SimpleGrid columns={1} spacing={1}>
 				{students}
 			</SimpleGrid>
+			<Modal isOpen={isOpen} onClose={onClose}>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader>Modal Title</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody>
+						<StudentForm id={formId} />
+					</ModalBody>
+
+					<ModalFooter>
+						<Button colorScheme="blue" mr={3} onClick={onClose}>
+							Close
+            			</Button>
+						<Button variant="ghost">Secondary Action</Button>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
 		</Container>
 	);
 }
@@ -49,7 +85,6 @@ export async function getStaticProps(context) {
 	}
 
 	data = data.students || data;
-
 	return {
 		props: { data }, // will be passed to the page component as props
 	}

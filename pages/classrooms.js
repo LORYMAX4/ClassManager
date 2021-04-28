@@ -41,13 +41,12 @@ function Classrooms(props) {
 export async function getStaticProps(context) {
 	const res = await fetch(`http://localhost:8080/classmanager/classroom/`)
 	let data = await res.json()
-
+	
 	if (!data) {
 		return {
 			notFound: true,
 		}
 	}
-
 	data = data;
 
 	return {

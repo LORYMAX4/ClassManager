@@ -1,0 +1,16 @@
+/home/ant/Anto/workspace/plansoft/java/ClassManager/src/main/java/it/plansoft/classmanager/model/Student.java
+/home/ant/Anto/workspace/plansoft/java/ClassManager/src/main/java/it/plansoft/classmanager/model/Classroom.java
+/home/ant/Anto/workspace/plansoft/java/ClassManager/src/main/java/it/plansoft/classmanager/repository/StudentRepository.java
+/home/ant/Anto/workspace/plansoft/java/ClassManager/src/main/java/it/plansoft/classmanager/service/ClassroomService.java
+/home/ant/Anto/workspace/plansoft/java/ClassManager/src/main/java/it/plansoft/classmanager/controller/IController.java
+/home/ant/Anto/workspace/plansoft/java/ClassManager/src/main/java/it/plansoft/classmanager/controller/ICrudController.java
+/home/ant/Anto/workspace/plansoft/java/ClassManager/src/main/java/it/plansoft/classmanager/controller/ClassroomController.java
+/home/ant/Anto/workspace/plansoft/java/ClassManager/src/main/java/it/plansoft/classmanager/controller/BaseCrudController.java
+/home/ant/Anto/workspace/plansoft/java/ClassManager/src/main/java/it/plansoft/classmanager/service/BaseCrudService.java
+/home/ant/Anto/workspace/plansoft/java/ClassManager/src/main/java/it/plansoft/classmanager/service/StudentService.java
+/home/ant/Anto/workspace/plansoft/java/ClassManager/src/main/java/it/plansoft/classmanager/service/interfaces/ICrudService.java
+/home/ant/Anto/workspace/plansoft/java/ClassManager/src/main/java/it/plansoft/classmanager/model/IDModel.java
+/home/ant/Anto/workspace/plansoft/java/ClassManager/src/main/java/it/plansoft/classmanager/ClassManagerApplication.java
+/home/ant/Anto/workspace/plansoft/java/ClassManager/src/main/java/it/plansoft/classmanager/service/interfaces/IStudentService.java
+/home/ant/Anto/workspace/plansoft/java/ClassManager/src/main/java/it/plansoft/classmanager/controller/StudentController.java
+/home/ant/Anto/workspace/plansoft/java/ClassManager/src/main/java/it/plansoft/classmanager/repository/ClassroomRepository.java
