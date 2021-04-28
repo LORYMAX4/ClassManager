@@ -10,8 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name = "classrooms")
+@Table(name = "classes")
 public class Classroom extends IDModel<Long> {
 
 	@Id
@@ -25,6 +27,7 @@ public class Classroom extends IDModel<Long> {
 	private int grade;
 
 	@OneToMany(mappedBy = "classroom")
+	@JsonIgnore
 	private Set<Student> students;
 
 	public Classroom() {
@@ -45,5 +48,9 @@ public class Classroom extends IDModel<Long> {
 
 	public int getGrade() {
 		return grade;
+	}
+
+	public Set<Student> getStudents() {
+		return students;
 	}
 }
