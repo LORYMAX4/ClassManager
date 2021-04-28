@@ -11,7 +11,7 @@ import { useState } from "react";
 
 function studentForm(props) {
 	const id = props.id;
-	const [data, setData] = useState({ id: "", name: "", lastName: "", sidiCode: "", taxCode: "" })
+	const [data, setData] = useState({ id: "", name: "", lastName: "", sidiCode: "", taxCode: "", classroom: { id: -2, name: "", grade: -2 } })
 
 	function handleChange(e) {
 		//data[e.target.name] = e.target.value;
@@ -20,21 +20,26 @@ function studentForm(props) {
 			newState[e.target.name] = e.target.value;
 			return newState;
 		});
-		console.log(data);
 	}
 
 	function submitData(event) {
 		event.preventDefault();
+
 		const formData = new FormData(event.target);
 		let jsonObj = Object.fromEntries(formData);
 		jsonObj.id = id;
+		jsonObj.classroom = data.classroom;
 		let json = JSON.stringify(jsonObj);
 
-		console.log(json);
-		
-		fetch(`http://localhost:8080/classmanager/students/${id}`, {
+		// http://localhost:8080/classmanager/students/${id}`
+		fetch(`http://localhost:8080/classmanager/students/`, { 
 			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
 			body: json
+		}).then((r) => {
+			setTimeout(() => {
+				window.location.reload();
+			}, 1500);
 		})
 	}
 
@@ -47,7 +52,7 @@ function studentForm(props) {
 	}
 
 	return (
-		<form>
+		<form onSubmit={submitData}>
 			<FormControl id="name">
 				<FormLabel>Nome</FormLabel>
 				<Input type="text" name="name" value={data.name} onChange={handleChange} />
@@ -64,14 +69,21 @@ function studentForm(props) {
 				<FormLabel>Codice fiscale</FormLabel>
 				<Input type="text" name="taxCode" value={data.taxCode} onChange={handleChange} />
 			</FormControl>
-			<Button onSubmit={submitData}>
+
+			<FormControl id="name">
+				<FormLabel>Nome Classe</FormLabel>
+				<Input type="text" name="name" value={data.classroom.name} onChange={handleChange} />
+			</FormControl>
+			<FormControl id="garde">
+				<FormLabel>Sezione</FormLabel>
+				<Input type="text" name="grade" value={data.classroom.grade} onChange={handleChange} />
+			</FormControl>
+			
+			<Button type="submit">
 				Aggiorna
 			</Button>
 		</form>
 	);
 }
-
-
-
 
 export default studentForm;

@@ -10,7 +10,7 @@ import {
 	ModalCloseButton,
 } from "@chakra-ui/react";
 
-function modelStudent (props) {
+function modelStudent(props) {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	return (
@@ -19,15 +19,14 @@ function modelStudent (props) {
 			<ModalContent>
 				<ModalHeader>Modal Title</ModalHeader>
 				<ModalCloseButton />
-				<ModalBody>
-					Ciao
-			</ModalBody>
-
-				<ModalFooter>
-					<Button colorScheme="blue" mr={3} onClick={onClose}>
-						Close
+					<ModalBody>
+						Ciao
+					</ModalBody>
+					<ModalFooter>
+						<Button colorScheme="blue" mr={3} onClick={onClose}>
+							Close
             			</Button>
-					<Button variant="ghost">Secondary Action</Button>
+					{/* <Button variant="ghost">Secondary Action</Button> */}
 				</ModalFooter>
 			</ModalContent>
 		</Modal>
