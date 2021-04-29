@@ -23,10 +23,10 @@ function deleteAllert(props) {
 					<AlertDialogFooter>
 						<Button onClick={props.onCloseDel}>
 							Cancel
-							</Button>
+						</Button>
 						<Button colorScheme="red" onClick={props.deleteStudent} ml={3}>
 							Delete
-							</Button>
+						</Button>
 					</AlertDialogFooter>
 				</AlertDialogContent>
 			</AlertDialogOverlay>

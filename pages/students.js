@@ -1,18 +1,5 @@
 import {
 	Text, IconButton, Container, useDisclosure, Button,
-	Modal,
-	ModalOverlay,
-	ModalContent,
-	ModalHeader,
-	ModalFooter,
-	ModalBody,
-	ModalCloseButton,
-	AlertDialog,
-	AlertDialogContent,
-	AlertDialogHeader,
-	AlertDialogBody,
-	AlertDialogFooter,
-	AlertDialogOverlay,
 } from "@chakra-ui/react"
 import { SimpleGrid, Box } from "@chakra-ui/react"
 import { FaPencilAlt, FaPlusCircle, FaSearch, FaTimes, FaUser } from 'react-icons/fa';
@@ -24,9 +11,11 @@ import ModelStudent from "./students/modelStudent"
 const Students = (props) => {
 	const { isOpen: isOpenEdit, onOpen: onOpenEdit, onClose: onCloseEdit } = useDisclosure()
 	const { isOpen: isOpenDel, onOpen: onOpenDel, onClose: onCloseDel } = useDisclosure()
-	// Used as param for the Modal
+
 	const [formId, setFormid] = useState(-1);
 	let students = [];
+
+	console.log(props.data);
 
 	for (let i = 0; i < 50; i++) {
 		let student = props.data[i];
@@ -97,3 +86,18 @@ export async function getStaticProps(context) {
 }
 
 export default Students;
+
+function handleChange(e) {
+	setData((prevState) => {
+		const newState = Object.assign({}, prevState);
+		const key = e.target.name;
+		if(key.contains("classroom")){
+			const fields = key.split('.');
+			newState[fields[0]][fields[1]] = e.target.value;
+		} else {
+			newState[key] = e.target.value;
+		}
+		console.log(newState);
+		return newState;
+	});
+}

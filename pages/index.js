@@ -43,7 +43,7 @@ export default function Home() {
 
 			<footer className={styles.footer}>
 				Powered by Plansoft
-      </footer>
+			</footer>
 		</div>
 	)
 }

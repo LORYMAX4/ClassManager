@@ -1,17 +1,22 @@
 import { IconButton } from "@chakra-ui/button";
+import { useDisclosure } from "@chakra-ui/react"
 import { Box, Container, SimpleGrid, Text } from "@chakra-ui/layout";
-import Link from "next/link";
 import { FaTable, FaUsers } from "react-icons/fa";
+import { useState } from "react"
+import ModalClass from "./classrooms/modalClass"
+import Link from "next/link";
 
 function Classrooms(props) {
 	let classrooms = [];
+	const { isOpen, onOpen, onClose } = useDisclosure()
+	const [classId, setClassId] = useState(-1)
 
 	for (let i = 0; i < props.data.length; i++) {
 		let classroom = props.data[i];
 		let classSection = classroom.section || classroom.name;
 		let classGrade = classroom.year || classroom.section;
 		classrooms.push((
-			<Box className="card">
+			<Box key={i} className="card">
 				<SimpleGrid columns={2} spacing={5}>
 					<Box>
 						<IconButton icon={<FaTable />} />
@@ -19,9 +24,7 @@ function Classrooms(props) {
 						<p><small>{classroom.taxCode}</small></p>
 					</Box>
 					<Box style={{ textAlign: "right" }}>
-						<Link href={"/classrooms/" + classroom.id}>
-							<IconButton bg="blue.400" color="white" marginRight={3} aria-label="Get" icon={<FaUsers />} />
-						</Link>
+						<IconButton bg="blue.400" color="white" marginRight={3} aria-label="Get" icon={<FaUsers />} onClick={() => { setClassId(classroom.id); onOpen(); }} />
 					</Box>
 				</SimpleGrid>
 			</Box>
@@ -34,6 +37,8 @@ function Classrooms(props) {
 			<SimpleGrid columns={1} spacing={1}>
 				{classrooms}
 			</SimpleGrid>
+
+			<ModalClass isOpen={isOpen} onClose={onClose} id={classId} />
 		</Container>
 	);
 }
@@ -41,7 +46,7 @@ function Classrooms(props) {
 export async function getStaticProps(context) {
 	const res = await fetch(`http://localhost:8080/classmanager/classroom/`)
 	let data = await res.json()
-	
+
 	if (!data) {
 		return {
 			notFound: true,

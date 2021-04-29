@@ -15,7 +15,7 @@ function modelStudent(props) {
 		<Modal isOpen={props.isOpenEdit} onClose={props.onCloseEdit}>
 			<ModalOverlay />
 			<ModalContent>
-				<ModalHeader>Edit Student</ModalHeader>
+				<ModalHeader>Student</ModalHeader>
 				<ModalCloseButton />
 				<ModalBody>
 					<StudentForm id={props.studentId} />
