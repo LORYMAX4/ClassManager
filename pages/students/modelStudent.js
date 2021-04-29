@@ -1,5 +1,4 @@
-import { useDisclosure, Button } from "@chakra-ui/react"
-
+import { Button } from "@chakra-ui/react"
 import {
 	Modal,
 	ModalOverlay,
@@ -9,24 +8,22 @@ import {
 	ModalBody,
 	ModalCloseButton,
 } from "@chakra-ui/react";
+import StudentForm from "./studentForm";
 
 function modelStudent(props) {
-	const { isOpen, onOpen, onClose } = useDisclosure();
-
 	return (
-		<Modal isOpen={props.ms.isOpen} onClose={onClose}>
+		<Modal isOpen={props.isOpenEdit} onClose={props.onCloseEdit}>
 			<ModalOverlay />
 			<ModalContent>
-				<ModalHeader>Modal Title</ModalHeader>
+				<ModalHeader>Edit Student</ModalHeader>
 				<ModalCloseButton />
-					<ModalBody>
-						Ciao
-					</ModalBody>
-					<ModalFooter>
-						<Button colorScheme="blue" mr={3} onClick={onClose}>
-							Close
-            			</Button>
-					{/* <Button variant="ghost">Secondary Action</Button> */}
+				<ModalBody>
+					<StudentForm id={props.studentId} />
+				</ModalBody>
+				<ModalFooter>
+					<Button colorScheme="blue" mr={3} onClick={props.onCloseEdit}>
+						Close
+					</Button>
 				</ModalFooter>
 			</ModalContent>
 		</Modal>

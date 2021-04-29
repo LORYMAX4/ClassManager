@@ -1,20 +1,24 @@
+import { useState } from "react";
 import {
 	FormControl,
 	FormLabel,
-	FormErrorMessage,
-	FormHelperText,
 	Input,
 	Button
 } from "@chakra-ui/react"
-import { useState } from "react";
-
 
 function studentForm(props) {
 	const id = props.id;
-	const [data, setData] = useState({ id: "", name: "", lastName: "", sidiCode: "", taxCode: "", classroom: { id: -2, name: "", grade: -2 } })
+	const [data, setData] = useState({ id: "", name: "", lastName: "", sidiCode: "", taxCode: "", classroom: { id: -2, name: "", grade: "" } })
+
+	if (id !== null && id !== -1 && data.id === "") {
+		const res = fetch(`http://localhost:8080/classmanager/students/${id}`).then((r) => {
+			r.json().then((d) => {
+				setData(d);
+			});
+		});
+	}
 
 	function handleChange(e) {
-		//data[e.target.name] = e.target.value;
 		setData((prevState) => {
 			const newState = Object.assign({}, prevState);
 			newState[e.target.name] = e.target.value;
@@ -29,26 +33,17 @@ function studentForm(props) {
 		let jsonObj = Object.fromEntries(formData);
 		jsonObj.id = id;
 		jsonObj.classroom = data.classroom;
-		let json = JSON.stringify(jsonObj);
+		const json = JSON.stringify(jsonObj);
 
-		// http://localhost:8080/classmanager/students/${id}`
-		fetch(`http://localhost:8080/classmanager/students/`, { 
+		fetch(`http://localhost:8080/classmanager/students/`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: json
 		}).then((r) => {
 			setTimeout(() => {
 				window.location.reload();
-			}, 1500);
+			}, 1000);
 		})
-	}
-
-	if (id !== null && data.id === "" && id !== -1) {
-		const res = fetch(`http://localhost:8080/classmanager/students/${id}`).then((r) => {
-			r.json().then((d) => {
-				setData(d);
-			});
-		});
 	}
 
 	return (
@@ -72,13 +67,13 @@ function studentForm(props) {
 
 			<FormControl id="name">
 				<FormLabel>Nome Classe</FormLabel>
-				<Input type="text" name="name" value={data.classroom.name} onChange={handleChange} />
+				<Input type="text" name="classroom.name" value={data.classroom.name} onChange={handleChange} />
 			</FormControl>
 			<FormControl id="garde">
 				<FormLabel>Sezione</FormLabel>
-				<Input type="text" name="grade" value={data.classroom.grade} onChange={handleChange} />
+				<Input type="text" name="classroom.grade" value={data.classroom.grade} onChange={handleChange} />
 			</FormControl>
-			
+
 			<Button type="submit">
 				Aggiorna
 			</Button>

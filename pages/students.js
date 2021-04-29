@@ -15,20 +15,18 @@ import {
 	AlertDialogOverlay,
 } from "@chakra-ui/react"
 import { SimpleGrid, Box } from "@chakra-ui/react"
-import Link from "next/link";
 import { FaPencilAlt, FaPlusCircle, FaSearch, FaTimes, FaUser } from 'react-icons/fa';
-import modelStudent from "./students/modelStudent"
-import StudentForm from "./students/studentForm";
 import { useState } from "react"
-
+import Link from "next/link";
+import DeleteAllert from "./students/deleteAllert";
+import ModelStudent from "./students/modelStudent"
 
 const Students = (props) => {
-	const { isOpen, onOpen, onClose } = useDisclosure()
-
+	const { isOpen: isOpenEdit, onOpen: onOpenEdit, onClose: onCloseEdit } = useDisclosure()
+	const { isOpen: isOpenDel, onOpen: onOpenDel, onClose: onCloseDel } = useDisclosure()
+	// Used as param for the Modal
+	const [formId, setFormid] = useState(-1);
 	let students = [];
-
-	const [formId, setstate] = useState(-1);
-	const [deleteOpen, setopen] = useState(false);
 
 	for (let i = 0; i < 50; i++) {
 		let student = props.data[i];
@@ -44,24 +42,23 @@ const Students = (props) => {
 						<Link href={"/students/" + student.id}>
 							<IconButton bg="blue.400" color="white" marginRight={3} aria-label="Get" icon={<FaSearch />} />
 						</Link>
-						<IconButton bg="green.400" color="white" marginRight={3} aria-label="Update" icon={<FaPencilAlt />} onClick={() => { setstate(student.id); onOpen(); }} />
-						<IconButton bg="red.400" color="white" aria-label="Delete" icon={<FaTimes />} onClick={() => { setstate(student.id); setopen(true); }} />
+						<IconButton bg="green.400" color="white" marginRight={3} aria-label="Update" icon={<FaPencilAlt />} onClick={() => { setFormid(student.id); onOpenEdit(); }} />
+						<IconButton bg="red.400" color="white" aria-label="Delete" icon={<FaTimes />} onClick={() => { setFormid(student.id); onOpenDel(); }} />
 					</Box>
 				</SimpleGrid>
 			</Box>
 		));
 	}
 
-
 	function deleteStudent() {
 		fetch(`http://localhost:8080/classmanager/students/${formId}`, {
 			method: 'DELETE',
 			headers: { 'Content-Type': 'application/json' }
 		}).then((r) => {
-			setopen(false);
+			onCloseDel();
 			setTimeout(() => {
 				window.location.reload();
-			}, 1500);
+			}, 500);
 		})
 	}
 
@@ -69,7 +66,7 @@ const Students = (props) => {
 		<Container maxW="2xl" centerContent>
 			<Text fontSize="2em" align="center">Students</Text>
 
-			<Button onClick={() => { setstate(-1); onOpen(); }} leftIcon={<FaPlusCircle />} colorScheme="blue" variant="solid">
+			<Button onClick={() => { setFormid(-1); onOpenEdit(); }} leftIcon={<FaPlusCircle />} colorScheme="blue" variant="solid">
 				Add student
 			</Button>
 
@@ -77,44 +74,8 @@ const Students = (props) => {
 				{students}
 			</SimpleGrid>
 
-			<Modal isOpen={isOpen} onClose={onClose}>
-				<ModalOverlay />
-				<ModalContent>
-					<ModalHeader>Edit Student</ModalHeader>
-					<ModalCloseButton />
-					<ModalBody>
-						<StudentForm id={formId} />
-					</ModalBody>
-					<ModalFooter>
-						<Button colorScheme="blue" mr={3} onClick={onClose}>
-							Close
-            			</Button>
-						{/* <Button variant="ghost">Secondary Action</Button> */}
-					</ModalFooter>
-				</ModalContent>
-			</Modal>
-			<AlertDialog isOpen={deleteOpen} onClose={onClose}>
-				<AlertDialogOverlay>
-					<AlertDialogContent>
-						<AlertDialogHeader fontSize="lg" fontWeight="bold">
-							Delete Customer
-						</AlertDialogHeader>
-
-						<AlertDialogBody>
-							Are you sure? You can't undo this action afterwards.
-						</AlertDialogBody>
-
-						<AlertDialogFooter>
-							<Button onClick={() => { setopen(false); }}>
-								Cancel
-							</Button>
-							<Button colorScheme="red" onClick={deleteStudent} ml={3}>
-								Delete
-							</Button>
-						</AlertDialogFooter>
-					</AlertDialogContent>
-				</AlertDialogOverlay>
-			</AlertDialog>
+			<ModelStudent isOpenEdit={isOpenEdit} onCloseEdit={onCloseEdit} studentId={formId} />
+			<DeleteAllert isOpenDel={isOpenDel} onCloseDel={onCloseDel} deleteStudent={deleteStudent} />
 		</Container>
 	);
 }
