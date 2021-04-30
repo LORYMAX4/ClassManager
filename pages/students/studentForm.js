@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Stack, HStack, VStack } from "@chakra-ui/react"
 import {
+	VStack,
 	FormControl,
 	FormLabel,
 	Input,
@@ -12,41 +12,34 @@ function studentForm(props) {
 	const [data, setData] = useState({ id: "", name: "", lastName: "", sidiCode: "", taxCode: "", classroom: { id: -2, name: "", grade: "" } })
 
 	if (id !== null && id !== -1 && data.id === "") {
-		const res = fetch(`http://localhost:8080/classmanager/students/${id}`).then((r) => {
-			r.json().then((d) => {
-				setData(d);
-			});
-		});
+		fetch(`http://localhost:8080/classmanager/students/${id}`)
+			.then((r) => r.json())
+			.then((json) => setData(json));
 	}
 
 	function handleChange(e) {
 		setData((prevState) => {
 			const newState = Object.assign({}, prevState);
 			const key = e.target.name;
-			console.log(key);
-			if(key.includes("classroom")){
+			if (key.includes("classroom")) {
 				const fields = key.split('.');
 				newState[fields[0]][fields[1]] = e.target.value;
 			} else {
 				newState[key] = e.target.value;
 			}
+			console.log(newState)
 			return newState;
 		});
 	}
 
+	//BUG: how to properly get the correct class id
 	function submitData(event) {
 		event.preventDefault();
-
-		const formData = new FormData(event.target);
-		let jsonObj = Object.fromEntries(formData);
-		jsonObj.id = id;
-		jsonObj.classroom = data.classroom;
-		const json = JSON.stringify(jsonObj);
 
 		fetch(`http://localhost:8080/classmanager/students/`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: json
+			body: JSON.stringify(data)
 		}).then((r) => {
 			setTimeout(() => {
 				window.location.reload();

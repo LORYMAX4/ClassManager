@@ -15,11 +15,11 @@ export default function Home() {
 			<main className={styles.main}>
 				<h1 className={styles.title}>
 					Benvenuto in ClassManager
-        		</h1>
+				</h1>
 
 				<p className={styles.description}>
 					Scegli l'azione che vuoi eseguire
-       			</p>
+				</p>
 
 				<SimpleGrid columns={2} spacing={10}>
 					<Box className="card">

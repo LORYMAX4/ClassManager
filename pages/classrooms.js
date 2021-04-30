@@ -4,7 +4,6 @@ import { Box, Container, SimpleGrid, Text } from "@chakra-ui/layout";
 import { FaTable, FaUsers } from "react-icons/fa";
 import { useState } from "react"
 import ModalClass from "./classrooms/modalClass"
-import Link from "next/link";
 
 function Classrooms(props) {
 	let classrooms = [];
@@ -14,13 +13,12 @@ function Classrooms(props) {
 	for (let i = 0; i < props.data.length; i++) {
 		let classroom = props.data[i];
 		let classSection = classroom.section || classroom.name;
-		let classGrade = classroom.year || classroom.section;
+		let classGrade = classroom.grade || classroom.section;
 		classrooms.push((
 			<Box key={i} className="card">
 				<SimpleGrid columns={2} spacing={5}>
 					<Box>
-						<IconButton icon={<FaTable />} />
-						<h3 style={{ marginLeft: '10px', display: 'inline-block' }}>{classGrade}{classSection}</h3>
+						<h3 style={{ marginLeft: '10px', display: 'inline-block' }}>{classGrade} {classSection}</h3>
 						<p><small>{classroom.taxCode}</small></p>
 					</Box>
 					<Box style={{ textAlign: "right" }}>
@@ -55,7 +53,7 @@ export async function getStaticProps(context) {
 	data = data;
 
 	return {
-		props: { data }, // will be passed to the page component as props
+		props: { data }
 	}
 }
 

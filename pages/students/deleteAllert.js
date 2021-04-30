@@ -6,10 +6,22 @@ import {
 	AlertDialogHeader,
 	AlertDialogContent,
 	AlertDialogOverlay,
-  } from "@chakra-ui/react"
-import StudentForm from "./studentForm";
+} from "@chakra-ui/react"
 
-function deleteAllert(props) {
+function DeleteAllert(props) {
+
+	function deleteStudent() {
+		fetch(`http://localhost:8080/classmanager/students/${props.studentId}`, {
+			method: 'DELETE',
+			headers: { 'Content-Type': 'application/json' }
+		}).then((r) => {
+			props.onCloseDel();
+			setTimeout(() => {
+				window.location.reload();
+			}, 500);
+		})
+	}
+
 	return (
 		<AlertDialog isOpen={props.isOpenDel} onClose={props.onCloseDel}>
 			<AlertDialogOverlay>
@@ -24,7 +36,7 @@ function deleteAllert(props) {
 						<Button onClick={props.onCloseDel}>
 							Cancel
 						</Button>
-						<Button colorScheme="red" onClick={props.deleteStudent} ml={3}>
+						<Button colorScheme="red" onClick={deleteStudent} ml={3}>
 							Delete
 						</Button>
 					</AlertDialogFooter>
@@ -34,4 +46,4 @@ function deleteAllert(props) {
 	)
 }
 
-export default deleteAllert
+export default DeleteAllert
