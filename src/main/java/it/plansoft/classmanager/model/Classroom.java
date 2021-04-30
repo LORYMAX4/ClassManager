@@ -28,6 +28,7 @@ public class Classroom extends IDModel<Long> {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "classroom")
+	@JsonIgnore
 	private Set<Student> students;
 
 	public Classroom() {
