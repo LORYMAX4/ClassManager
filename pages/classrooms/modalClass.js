@@ -17,7 +17,7 @@ function ModalClass(props) {
 	const id = props.id
 	const [data, setData] = useState([])
 
-	if (id !== null && id !== -1 && data.length === 0) {
+	if (id !== null && id !== -1 && (data.length === 0 || data[0]?.classroom.id !== id)) {
 		fetch(`http://localhost:8080/classmanager/classroom/${id}/students`)
 			.then((r) => {
 				if (!r.ok) throw new Error(r.statusText);
