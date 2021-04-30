@@ -14,7 +14,7 @@ function modelStudent(props) {
 	const id = props.studentId;
 	const [student, setData] = useState({ id: "", name: "", lastName: "", sidiCode: "", taxCode: "", classroom: { id: -2, name: "", grade: "" } })
 
-	if (id !== null && id !== -1 && student.id === "") {
+	if (id !== null && id !== -1 && (student.id === "" || student.id !== id)) {
 		fetch(`http://localhost:8080/classmanager/students/${id}`)
 			.then((r) => r.json())
 			.then((d) => setData(d));
