@@ -27,24 +27,41 @@ function studentForm(props) {
 			} else {
 				newState[key] = e.target.value;
 			}
-			console.log(newState)
+
 			return newState;
 		});
 	}
 
-	//BUG: how to properly get the correct class id
+
 	function submitData(event) {
 		event.preventDefault();
 
-		fetch(`http://localhost:8080/classmanager/students/`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(data)
-		}).then((r) => {
-			setTimeout(() => {
-				window.location.reload();
-			}, 1000);
-		})
+		fetch(`http://localhost:8080/classmanager/classroom/search?name=${data.classroom.name}&grade=${data.classroom.grade}`)
+			.then(r => { 
+				console.log(r.statusText); 
+				return r.json()
+			})
+			.then(json => {
+				setData((prevState) => {
+					const newState = Object.assign({}, prevState);
+					console.log(json)
+					newState["classroom"]["id"] = json.id;
+					return newState;
+				})
+
+				console.log(data);
+
+				fetch(`http://localhost:8080/classmanager/students/`, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(data)
+				}).then((r) => {
+					setTimeout(() => {
+						//window.location.reload();
+					}, 1000);
+				})
+
+			});
 	}
 
 	return (
