@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "classes")
+@Table(name = "CLASSES")
 public class Classroom extends IDModel<Long> {
 
 	@Id
@@ -25,7 +25,8 @@ public class Classroom extends IDModel<Long> {
 	private String name;
 	@Column(name = "GRADE", nullable = false)
 	private int grade;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "classroom")
 	@JsonIgnore
 	private Set<Student> students;
@@ -52,5 +53,9 @@ public class Classroom extends IDModel<Long> {
 
 	public Set<Student> getStudents() {
 		return students;
+	}
+
+	public void setStudents(Set<Student> students) {
+		this.students = students;
 	}
 }

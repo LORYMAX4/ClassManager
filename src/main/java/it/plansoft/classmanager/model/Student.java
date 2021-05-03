@@ -3,7 +3,7 @@ package it.plansoft.classmanager.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "students")
+@Table(name = "STUDENTS")
 public class Student extends IDModel<Long> {
 
 	@Id
