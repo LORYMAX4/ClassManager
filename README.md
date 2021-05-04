@@ -1,145 +1,71 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![plansoft-icon-1 (1)](https://user-images.githubusercontent.com/51908859/113130686-a16dcf80-921c-11eb-9e65-a0821a6aab71.png)
+
+# ClassManager
+
+**Data emissione** : 31 marzo 2021
 
 ## Indice
-- [Gruppo di lavoro](#gruppo-di-lavoro)
-- [Scopo del progetto](#scopo-del-progetto)
-- [Richieste implementative](#richieste-implementative)
-- [Modello E/R](#modello-entità-relazione)
-- [Endpoint](#endpoint)
-- [Implementazione](#implementazione)
+
+- [ClassManager](#classmanager)
+  - [Indice](#indice)
+  - [Gruppo di lavoro](#gruppo-di-lavoro)
+  - [Scopo del progetto](#scopo-del-progetto)
+  - [Richieste implementative](#richieste-implementative)
+    - [Oggetti](#oggetti)
+  - [Modello Entità Relazione](#modello-entità-relazione)
+  - [Implementazione](#implementazione)
+    - [Tecnologie/Linguaggi utilizzati](#tecnologielinguaggi-utilizzati)
+        - [Torna all'indice](#torna-allindice)
 
 ## Gruppo di lavoro
+
 - [PlanSoft](https://www.plansoft.it/) (Cliente e PM)
 - [Leonardo Morganti](https://github.com/Leomorga) (Sviluppatore)
 - [Leonardo Scrivere](https://github.com/scrivereleonardo) (Sviluppatore)
 - [Lorenzo Merlini](https://github.com/LORYMAX4) (Sviluppatore)
 
 ## Scopo del progetto
+
 Viene richiesta la creazione della parte di backend per la gestione degli studenti all'interno delle proprie classi. Le funzionalità che saranno implementate sono le seguenti:
 
 - Visualizzazione di tutti o di un singolo studente.
 - Inserimento, modifica e cancellazione di un determinato studente.
 - Visualizzazione di tutte o di una singola classe.
 
-### Studenti
+Ad ogni dipendente è associato: un id identificativo, nome, cognome, codice fiscale, SIDI_CODE e l’id identificativa della propria classe di appartenenza.
 
-- Get Lista studenti= `/classmanager/students`
+## Richieste implementative
 
-```
-[
-  {
-    id: 1,
-    name: "Lorenzo",
-    surname: "Merlini",
-    taxCode: "AAAAAA99A99A999A",
-    sidiCode: "99999999",
-    classroom: 1
-  },
-  {
-    id: 2,
-    name: "Mario",
-    surname: "Rossi",
-    taxCode: "BBBBBB77B77B777B",
-    sidiCode: "77777777",
-    classroom: 2
-  }
-]
-```
+### Oggetti
 
-- Get Studente = `/classmanager/students/{id}`
+Gli oggetti che dobbiamo trattare sono:
+- Studente(id, nome, cognome, codice fiscale, SIDI_CODE)
+- Classe(id, sezione, grado)
 
-```
-{
-  id: 1,
-  name: "Lorenzo",
-  surname: "Merlini",
-  taxCode: "AAAAAA99A99A999A",
-  sidiCode: "99999999",
-  classroom: 1
-}
-```
+Inoltre gli oggetti sono collegati in questo modo:
+- Una classe è composta da più studenti.
 
-- POST Studente = `/classmanager/students/`
+## Modello Entità Relazione
 
-```
-{
-  id: 1,
-  name: "Lorenzo",
-  surname: "Merlini",
-  taxCode: "AAAAAA99A99A999A",
-  sidiCode: "99999999",
-  classroom: 1
-}
-```
+![unnamed (2)](https://user-images.githubusercontent.com/51908859/113143311-480d9c80-922c-11eb-9d4f-23f16bc941a6.png)
 
-- PUT Studente = `/classmanager/students/{id}`
+Studente(id, nome, cognome, codice fiscale, SIDI_CODE, classroom)
 
-```
-{
-  name: "Lorenzo",
-  surname: "Merlini",
-  taxCode: "AAAAAA99A99A999A",
-  sidiCode: "99999999",
-  classroom: 1
-}
-```
-- DELETE Studente = `/classmanager/students/{id}`
+Classe(id, nome, grado)
 
-### Classi
-- GET Lista classi = `/classmanager/classroom/`
-```
-[
-  {
-    id: 1,
-    grade: 1,
-    name: "NEE"
-  },
-  {
-    id: 2,
-    grade: 1,
-    name: "DMME"
-  }
-]
-```
-- GET classe = `/classmanager/classroom/{id}`
-```
-{
-  id: 1,
-  grade: 1,
-  name: "NEE"
-}
-```
+## Implementazione
 
-## Getting Started
+### Tecnologie/Linguaggi utilizzati
 
-First, run the development server:
+**Backend**
+- Java
+   - Linguaggio di programmazione utilizzato per lo sviluppo dell’applicazione tramite il framework Spring.
+- Spring
+  - Framework utilizzato per lo sviluppo di web application, quindi collegamento al database(MySql) ed esposizione delle API.
+- Maven
+  - Strumento utilizzato per facilitare la gestione delle dipendenze utilizzando il file pom.xml.
+- Postman
+  - Strumento utilizzato per verificare il corretto funzionamento delle API realizzate.
+ 
 
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
+##### [Torna all'indice](#indice)
