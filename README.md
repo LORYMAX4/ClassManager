@@ -33,6 +33,7 @@ Viene richiesta la creazione della parte di backend per la gestione degli studen
 
 L'applicazione è accessibile sulla porta 3000 e all'indirizzo `http://localhost:3000/`.
 
+```
 📦webapp
  ┣ 📂pages
  ┃ ┣ 📂api
@@ -59,6 +60,7 @@ L'applicazione è accessibile sulla porta 3000 e all'indirizzo `http://localhost
  ┣ 📜package-lock.json
  ┗ 📜package.json
 
+```
 ### [Home](http://localhost:3000/)
 
 Home page dell'aplicazione, permette la navigazione attrvaerso due pulsanti:
@@ -85,7 +87,7 @@ Offre la possibilità di modificare i dettagli di uno studente.
 
 ### Eliminazione Studente - Alert
 
-Richiesta di conferma per l'eliminazione di uno studente. 
+Richiesta di conferma per l'eliminazione di uno studente.	 
 
 ---
 
