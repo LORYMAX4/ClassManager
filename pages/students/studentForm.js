@@ -37,8 +37,7 @@ function studentForm(props) {
 		event.preventDefault();
 
 		fetch(`http://localhost:8080/classmanager/classroom/search?name=${data.classroom.name}&grade=${data.classroom.grade}`)
-			.then(r => { 
-				console.log(r.statusText); 
+			.then(r => {
 				return r.json()
 			})
 			.then(json => {
@@ -48,16 +47,20 @@ function studentForm(props) {
 					newState["classroom"]["id"] = json.id;
 					return newState;
 				})
-
-				console.log(data);
+				
+				let newData = Object.assign({}, data);;
+				if(newData.id === "")
+					delete newData.id
+				
+					console.log(newData);
 
 				fetch(`http://localhost:8080/classmanager/students/`, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify(data)
+					body: JSON.stringify(newData)
 				}).then((r) => {
 					setTimeout(() => {
-						//window.location.reload();
+						window.location.reload();
 					}, 1000);
 				})
 

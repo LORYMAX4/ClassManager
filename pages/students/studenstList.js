@@ -41,7 +41,7 @@ const StudentsList = (props) => {
 
 			<ModelForm isOpenEdit={isOpenEdit} onCloseEdit={onCloseEdit} studentId={formId} />
 			<DeleteAllert isOpenDel={isOpenDel} onCloseDel={onCloseDel} studentId={formId} />
-			<ModelStudent isOpenEdit={isOpenShow} onCloseEdit={onCloseShow} studentId={formId} />
+			<ModelStudent isOpenShow={isOpenShow} onCloseShow={onCloseShow} studentId={formId} />
 		</Container>
 	);
 }

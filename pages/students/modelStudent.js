@@ -21,7 +21,7 @@ function modelStudent(props) {
 	}
 
 	return (
-		<Modal isOpen={props.isOpenEdit} onClose={props.onCloseEdit}>
+		<Modal isOpen={props.isOpenShow} onClose={props.onCloseShow}>
 			<ModalOverlay />
 			<ModalContent>
 				<ModalHeader>Student</ModalHeader>
@@ -36,7 +36,7 @@ function modelStudent(props) {
 					</Box>
 				</ModalBody>
 				<ModalFooter>
-					<Button colorScheme="blue" mr={3} onClick={props.onCloseEdit}>
+					<Button colorScheme="blue" mr={3} onClick={props.onCloseShow}>
 						Close
 					</Button>
 				</ModalFooter>

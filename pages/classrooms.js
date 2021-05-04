@@ -29,16 +29,16 @@ function Classrooms(props) {
 		));
 	}
 
-	return (
-		<Container maxW="2xl" centerContent>
-			<Text fontSize="2em" align="center">Classrooms</Text>
-			<SimpleGrid columns={1} spacing={1}>
-				{classrooms}
-			</SimpleGrid>
+		return (
+			<Container maxW="2xl" centerContent>
+				<Text fontSize="2em" align="center">Classrooms</Text>
+				<SimpleGrid columns={1} spacing={1}>
+					{classrooms}
+				</SimpleGrid>
 
-			<ModalClass isOpen={isOpen} onClose={onClose} id={classId} />
-		</Container>
-	);
+				<ModalClass isOpen={isOpen} onClose={onClose} id={classId} />
+			</Container>
+		);
 }
 
 export async function getStaticProps(context) {
