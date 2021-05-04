@@ -1,5 +1,6 @@
 package it.plansoft.classmanager.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -35,9 +36,9 @@ public class ClassroomController {
 	}
 
 	@GetMapping("/{id}/students")
-	public Set<Student> getStudentsByClass(@PathVariable Long id) {
+	public List<Student> getStudentsByClass(@PathVariable Long id) {
 		Classroom c = service.findById(id).orElseThrow(() -> new RuntimeException());
-		return c.getStudents();
+		return new ArrayList<Student>(c.getStudents());
 	}
 
 	@GetMapping("/search")
