@@ -1,0 +1,9 @@
+npx create-next-app classmanager-frontend --use-npm --example "https://github.com/vercel/next-learn-starter/tree/master/learn-starter"
+npm i @chakra-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^4
+npm install react-icons --save
+
+https://github.com/plansoft-it/ClassManager/tree/main/styles
+https://github.com/plansoft-it/ClassManager/blob/main/pages/index.js
+
+npm run build
+npm run dev

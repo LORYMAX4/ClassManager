@@ -26,7 +26,6 @@ public class Classroom extends IDModel<Long> {
 	@Column(name = "GRADE", nullable = false)
 	private int grade;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "classroom")
 	@JsonIgnore
 	private Set<Student> students;
