@@ -17,12 +17,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
 import it.plansoft.classmanager.model.Classroom;
 import it.plansoft.classmanager.repository.ClassroomRepository;
 
-@EnableSpringDataWebSupport
 @RunWith(MockitoJUnitRunner.class)
 public class ClassroomServiceTest {
 
@@ -37,18 +35,16 @@ public class ClassroomServiceTest {
 
 	@Test
 	public void testFindByGradeName() {
-		Optional<Classroom> testClassroom = Optional.of(new Classroom(name, grade));
 		Optional<Classroom> expectedClassroom = Optional.of(new Classroom(name, grade));
-		when(repository.findByNameAndGrade(name, grade)).thenReturn(testClassroom);
+		when(repository.findByNameAndGrade(name, grade)).thenReturn(Optional.of(new Classroom(name, grade)));
 
 		assertEquals(expectedClassroom, service.findByGradeName(grade, name));
 	}
 
 	@Test
 	public void testFindById() {
-		Optional<Classroom> testClassroom = Optional.of(new Classroom(name, grade));
 		Optional<Classroom> expectedClassroom = Optional.of(new Classroom(name, grade));
-		when(repository.findById(id)).thenReturn(testClassroom);
+		when(repository.findById(id)).thenReturn(Optional.of(new Classroom(name, grade)));
 
 		assertEquals(expectedClassroom, service.findById(id));
 	}
@@ -70,6 +66,7 @@ public class ClassroomServiceTest {
 		Classroom c1 = new Classroom("class1", 1);
 		Classroom c2 = new Classroom("class2", 2);
 		List<Classroom> classes = Arrays.asList(c1, c2);
+		
 		Page<Classroom> expectedPageClasses = new PageImpl<Classroom>(classes);
 		Pageable pageable = PageRequest.of(0, 2);
 		when(repository.findAll(pageable)).thenReturn(new PageImpl<Classroom>(classes));
@@ -82,9 +79,10 @@ public class ClassroomServiceTest {
 	@Test
 	public void testSaveOrder() {
 		Classroom testClassroom = new Classroom(name, grade);
+		Classroom expectedClassroom = new Classroom(name, grade);
 		when(repository.save(testClassroom)).thenReturn(testClassroom);
-
-		assertEquals(testClassroom, service.save(testClassroom));
+	
+		assertEquals(service.save(testClassroom), expectedClassroom);
 	}
 
 	@Test
@@ -93,7 +91,7 @@ public class ClassroomServiceTest {
 
 		verify(repository).deleteById(id);
 	}
-
+	
 	@Test
 	public void testDelete() {
 		Classroom testClassroom = new Classroom(name, grade);
@@ -102,5 +100,13 @@ public class ClassroomServiceTest {
 
 		verify(repository).delete(testClassroom);
 	}
-
+	
+	@Test
+	public void testUpdate() {
+		Classroom testClassroom = new Classroom(name, grade);
+		Classroom expectedClassroom = new Classroom(name, grade);
+		when(repository.save(testClassroom)).thenReturn(testClassroom);
+	
+		assertEquals(service.update(testClassroom), expectedClassroom);
+	}
 }
