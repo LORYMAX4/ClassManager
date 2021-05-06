@@ -86,7 +86,8 @@ public class ClassroomControllerTest {
 		final Long id = 1L;
 		Student s1 = new Student(1L, "name1", "lastname1", "sidi1", "tax1", null);
 		Student s2 = new Student(2L, "name2", "lastname2", "sidi2", "tax2", null);
-		List<Student> expectedStudents = Arrays.asList(s1, s2);
+		Student s3 = new Student(3L, "name3", "lastname3", "sidi3", "tax3", null);
+		List<Student> expectedStudents = Arrays.asList(s1, s2, s3);
 		Classroom classroom = new Classroom();
 		classroom.setStudents(new HashSet<Student>(expectedStudents));
 		when(this.service.findById(id)).thenReturn(Optional.of(classroom));

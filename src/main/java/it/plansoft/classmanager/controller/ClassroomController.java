@@ -37,8 +37,11 @@ public class ClassroomController {
 	@GetMapping("/{id}/students")
 	public List<Student> getStudentsByClass(@PathVariable Long id) {
 		Classroom c = service.findById(id).orElseThrow(() -> new RuntimeException());
+
 		return c.getStudents().stream()
-				.sorted((a,b)-> a.getLastName().compareTo(b.getLastName()))
+				.sorted((a, b) -> a.getLastName().compareTo(b.getLastName()) != 0
+						? a.getLastName().compareTo(b.getLastName())
+						: a.getName().compareTo(b.getName()))
 				.collect(Collectors.toList());
 	}
 
