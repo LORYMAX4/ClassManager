@@ -3,12 +3,14 @@
 - [Gruppo di lavoro](#gruppo-di-lavoro)
 - [Scopo del progetto](#scopo-del-progetto)
 - [Frontend](#frontend)
-	- [Home](#home)
-	- [Elenco Studenti](#elenco-studenti)
-	- [Elenco Classi](#elenco-classi)
-	- [Dettaglio Studenti - Modale](#dettaglio-studenti---modale)
-	- [Modifica Studente - Modale](#modifica-studente---modale)
-	- [Eliminazione Studente - Alert](#eliminazione-studente---alert)
+	- [Esecuzione](#esecuzione)
+	- [Struttura e Componenti](#struttura-e-componenti)
+		- [Home](#home)
+		- [Elenco Studenti](#elenco-studenti)
+		- [Elenco Classi](#elenco-classi)
+		- [Dettaglio Studenti - Modale](#dettaglio-studenti---modale)
+		- [Modifica Studente - Modale](#modifica-studente---modale)
+		- [Eliminazione Studente - Alert](#eliminazione-studente---alert)
 - [Backend](#backend)
 	- [Classi](#classi)
 
@@ -31,7 +33,12 @@ Viene richiesta la creazione della parte di backend per la gestione degli studen
 
 ## Frontend 
 
-L'applicazione è accessibile sulla porta 3000 e all'indirizzo `http://localhost:3000/`.
+### Esecuzione
+
+Per eseguire l'applicazione frontend spostarsi nella direcotry `src/main/webapp/` ed eseguire il comando `npm run dev`.  
+L'applicazione è accessibile sulla porta `3000` all'indirizzo `http://localhost:3000/`.
+
+
 
 ```
 📦webapp
@@ -61,33 +68,42 @@ L'applicazione è accessibile sulla porta 3000 e all'indirizzo `http://localhost
  ┗ 📜package.json
 
 ```
-### [Home](http://localhost:3000/)
+
+### Struttura e Componenti
+
+#### [Home](http://localhost:3000/)
 
 Home page dell'aplicazione, permette la navigazione attrvaerso due pulsanti:
-il primo conduce ad una pagina in cui è possibile consultare la lista di studenti,
-il secondo conduce ad una pagina in cui è possibile consultare la lista di classi.
+il primo, etichettato *Classi*, conduce ad una pagina in cui è possibile consultare la lista di classi.
+il secondo, etichettato *Studenti*,  conduce ad una pagina in cui è possibile consultare la lista di studenti.
 
-### [Elenco Studenti](http://localhost:3000/students)
+#### [Elenco Studenti](http://localhost:3000/students)
 
 La pagina mette a disposizione la lista degli studenti; per ogni elemento della lista è possibile visualizzare i suoi dettagli, aggiornare i suoi dati oppure rimuoverlo dalla lista.
 
 È presente inoltre un pulsante per l'aggiunta di un nuovo studente alla lista.
 
-### [Elenco Classi](http://localhost:3000/classroom)
+#### [Elenco Classi](http://localhost:3000/classroom)
 
-La pagina permette la visualizzazione della lista delle classi. Per ogni classe è possibile visualizzare la sua lista di studenti. 
+La pagina permette la visualizzazione della lista delle classi. Per ogni classe è possibile visualizzare la sua lista dei suoi studenti ed apportare modifiche.
 
-### Dettaglio Studenti - Modale
+#### Dettaglio Studenti - Modale
 
-Mostra i dettagli di un singolo studente.
+Mostra i dettagli di un singolo studente:
+- nome
+- cognome
+- codice sidi
+- codice fiscale
+- anno scolastico
+- sezione
 
-### Modifica Studente - Modale
+#### Modifica Studente - Modale
 
 Offre la possibilità di modificare i dettagli di uno studente.
 
-### Eliminazione Studente - Alert
+#### Eliminazione Studente - Alert
 
-Richiesta di conferma per l'eliminazione di uno studente.	 
+Prima dell'eliminazione effettiva di uno studente vieni fatta una ichiesta di conferma la rimozione.
 
 ---
 
