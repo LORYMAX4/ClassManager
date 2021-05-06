@@ -1,12 +1,16 @@
 package it.plansoft.classmanager.controller;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -17,8 +21,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.plansoft.classmanager.model.Classroom;
+import it.plansoft.classmanager.model.Student;
 import it.plansoft.classmanager.service.ClassroomService;
 
 @RunWith(SpringRunner.class)
@@ -42,4 +51,59 @@ public class ClassroomControllerTest {
 				.andExpect(jsonPath("$.name", is(classroom.getName())))
 				.andExpect(jsonPath("$.grade", is(classroom.getGrade())));
 	}
+
+	@Test
+	public void testGetByGradeName() throws Exception {
+		final int grade = 1;
+		final String name = "class";
+		Classroom classroom = new Classroom(name, grade);
+
+		when(this.service.findByGradeName(grade, name)).thenReturn(Optional.of(classroom));
+
+		mvc.perform(get("/classroom/search?grade=" + grade + "&name=" + name)).andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(jsonPath("$.name", is(classroom.getName())))
+				.andExpect(jsonPath("$.grade", is(classroom.getGrade())));
+	}
+
+	@Test
+	public void testGetAll() throws Exception {
+		Classroom c1 = new Classroom("class1", 1);
+		Classroom c2 = new Classroom("class2", 2);
+		List<Classroom> expectedClasses = Arrays.asList(c1, c2);
+		when(this.service.findAll()).thenReturn(expectedClasses);
+
+		MvcResult mvcResult = mvc.perform(get("/classroom/")).andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+
+		String jsonString = mvcResult.getResponse().getContentAsString();
+		List<Classroom> actualClasses = new ObjectMapper().readValue(jsonString, new TypeReference<List<Classroom>>() {}); // Slow, array is way faster
+		assertEquals(expectedClasses, actualClasses);
+	}
+	
+	@Test
+	public void testGetStudentsByClass() throws Exception {
+		final Long id = 1L;
+		Student s1 = new Student(1L, "name1", "lastname1", "sidi1", "tax1", null);
+		Student s2 = new Student(2L, "name2", "lastname2", "sidi2", "tax2", null);
+		List<Student> expectedStudents = Arrays.asList(s1, s2);
+		Classroom classroom = new Classroom();
+		classroom.setStudents(new HashSet<Student>(expectedStudents));
+		when(this.service.findById(id)).thenReturn(Optional.of(classroom));
+
+		MvcResult mvcResult = mvc.perform(get("/classroom/" + id + "/students")).andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+
+		String jsonString = mvcResult.getResponse().getContentAsString();
+		List<Student> actualStudents = new ObjectMapper().readValue(jsonString, new TypeReference<List<Student>>() {}); // Slow, array is way faster
+		assertEquals(expectedStudents, actualStudents);
+	}
+	
+//	@Test(expected = RuntimeException.class)
+//	public void testGetStudentsByClassNoClassFoundThrow() throws Exception {
+//		final Long id = 1L;
+//		when(this.service.findById(id)).thenReturn(Optional.empty());
+//				
+//		mvc.perform(get("/classroom/" + id + "/students"));
+//	}
 }

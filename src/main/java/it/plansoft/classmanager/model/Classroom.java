@@ -58,18 +58,7 @@ public class Classroom extends IDModel<Long> {
 		this.students = students;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + grade;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((students == null) ? 0 : students.hashCode());
-		return result;
-	}
-	
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) return true;
@@ -97,6 +86,11 @@ public class Classroom extends IDModel<Long> {
 			return false;
 		
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Classroom [id=" + id + ", name=" + name + ", grade=" + grade + ", students=" + students + "]";
 	}
 
 }
