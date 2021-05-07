@@ -2,6 +2,7 @@
 - [Indice](#indice)
 - [Gruppo di lavoro](#gruppo-di-lavoro)
 - [Scopo del progetto](#scopo-del-progetto)
+- [Esecuzione con docker](#esecuzione-con-docker)
 - [Frontend](#frontend)
 	- [Esecuzione](#esecuzione)
 	- [Struttura e Componenti](#struttura-e-componenti)
@@ -28,6 +29,33 @@ Viene richiesta la creazione della parte di backend per la gestione degli studen
 - Visualizzazione di tutti o di un singolo studente.
 - Inserimento, modifica e cancellazione di un determinato studente.
 - Visualizzazione di tutte o di una singola classe.
+
+---
+## Esecuzione usando docker
+
+1. Esecuzione del container mysql, sostituire <root> con il percorso assoluto al progetto:
+
+```Bash
+docker run --name db_classmanager -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -v <root>/src/main/docker/database:/docker-entrypoint-initdb.d -v <root>/database_data:/var/lib/mysql mysql
+```
+
+2. Appena il container db_classmanager è in stato di run possiamo eseguire la build del backend usando maven:
+
+```Bash
+mvn clean package
+```
+
+3. La build genera un file jar all'interno della directory target con il quale possiamo generare l'immagine del backend di classmanager:
+
+```Bash
+docker build -t classmanager/backend . -f src/main/docker/backend/Dockerfile
+```
+
+4. Generata l'immagine è possibile eseguirla generando la connessione con il database:
+
+```Bash
+docker run -p 8080:8080 --link=db_classmanager:localhost classmanager/backend
+```
 
 ---
 
