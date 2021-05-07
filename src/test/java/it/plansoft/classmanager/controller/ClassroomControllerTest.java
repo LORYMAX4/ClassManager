@@ -1,5 +1,6 @@
 package it.plansoft.classmanager.controller;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -84,12 +85,12 @@ public class ClassroomControllerTest {
 	@Test
 	public void testGetStudentsByClass() throws Exception {
 		final Long id = 1L;
-		Student s1 = new Student(1L, "name1", "lastname1", "sidi1", "tax1", null);
-		Student s2 = new Student(2L, "name2", "lastname2", "sidi2", "tax2", null);
-		Student s3 = new Student(3L, "name3", "lastname3", "sidi3", "tax3", null);
-		List<Student> expectedStudents = Arrays.asList(s1, s2, s3);
+		Student s1 = new Student(1L, "AAA", "AAA", "sidi1", "tax1", null);
+		Student s2 = new Student(2L, "UUU", "BBB", "sidi2", "tax2", null);
+		Student s3 = new Student(3L, "CCC", "BBB", "sidi3", "tax3", null);
+		List<Student> expectedStudents = Arrays.asList(s1, s3, s2);
 		Classroom classroom = new Classroom();
-		classroom.setStudents(new HashSet<Student>(expectedStudents));
+		classroom.setStudents(new HashSet<Student>(Arrays.asList(s1, s2, s3)));
 		when(this.service.findById(id)).thenReturn(Optional.of(classroom));
 
 		MvcResult mvcResult = mvc.perform(get("/classroom/" + id + "/students")).andExpect(status().isOk())
@@ -100,11 +101,11 @@ public class ClassroomControllerTest {
 		assertEquals(expectedStudents, actualStudents);
 	}
 	
-//	@Test(expected = RuntimeException.class)
-//	public void testGetStudentsByClassNoClassFoundThrow() throws Exception {
-//		final Long id = 1L;
-//		when(this.service.findById(id)).thenReturn(Optional.empty());
-//				
-//		mvc.perform(get("/classroom/" + id + "/students"));
-//	}
+	@Test
+	public void testGetStudentsByClassNoClassFoundThrow() throws Exception {
+		final Long id = 1L;
+		when(this.service.findById(id)).thenReturn(Optional.empty());
+		
+		assertThatThrownBy(() -> mvc.perform(get("/classroom/" + id + "/students"))).hasCause(new RuntimeException());
+	}
 }
