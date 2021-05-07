@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+
+  backend:
+    build:
+      context: ../../../
+      dockerfile: ./src/main/docker/backend/Dockerfile
+    ports:
+      - "8080:8080"
+    links:
+      - database:localhost
+    depends_on:
+      - database
+
+  database:
+    image: mysql:latest
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+
