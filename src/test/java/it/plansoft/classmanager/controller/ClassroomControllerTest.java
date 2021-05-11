@@ -46,7 +46,6 @@ public class ClassroomControllerTest {
 		Classroom classroom = new Classroom("name", 1);
 
 		when(this.service.findById(classId)).thenReturn(Optional.of(classroom));
-
 		mvc.perform(get("/classroom/" + classId)).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.name", is(classroom.getName())))
@@ -60,7 +59,6 @@ public class ClassroomControllerTest {
 		Classroom classroom = new Classroom(name, grade);
 
 		when(this.service.findByGradeName(grade, name)).thenReturn(Optional.of(classroom));
-
 		mvc.perform(get("/classroom/search?grade=" + grade + "&name=" + name)).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.name", is(classroom.getName())))
@@ -72,13 +70,13 @@ public class ClassroomControllerTest {
 		Classroom c1 = new Classroom("class1", 1);
 		Classroom c2 = new Classroom("class2", 2);
 		List<Classroom> expectedClasses = Arrays.asList(c1, c2);
+		
 		when(this.service.findAll()).thenReturn(expectedClasses);
-
 		MvcResult mvcResult = mvc.perform(get("/classroom/")).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
 		String jsonString = mvcResult.getResponse().getContentAsString();
-		List<Classroom> actualClasses = new ObjectMapper().readValue(jsonString, new TypeReference<List<Classroom>>() {}); // Slow, array is way faster
+		List<Classroom> actualClasses = new ObjectMapper().readValue(jsonString, new TypeReference<List<Classroom>>() {});
 		assertEquals(expectedClasses, actualClasses);
 	}
 	
@@ -91,21 +89,21 @@ public class ClassroomControllerTest {
 		List<Student> expectedStudents = Arrays.asList(s1, s3, s2);
 		Classroom classroom = new Classroom();
 		classroom.setStudents(new HashSet<Student>(Arrays.asList(s1, s2, s3)));
+		
 		when(this.service.findById(id)).thenReturn(Optional.of(classroom));
-
 		MvcResult mvcResult = mvc.perform(get("/classroom/" + id + "/students")).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
 		String jsonString = mvcResult.getResponse().getContentAsString();
-		List<Student> actualStudents = new ObjectMapper().readValue(jsonString, new TypeReference<List<Student>>() {}); // Slow, array is way faster
+		List<Student> actualStudents = new ObjectMapper().readValue(jsonString, new TypeReference<List<Student>>() {});
 		assertEquals(expectedStudents, actualStudents);
 	}
 	
 	@Test
 	public void testGetStudentsByClassNoClassFoundThrow() throws Exception {
 		final Long id = 1L;
-		when(this.service.findById(id)).thenReturn(Optional.empty());
 		
+		when(this.service.findById(id)).thenReturn(Optional.empty());
 		assertThatThrownBy(() -> mvc.perform(get("/classroom/" + id + "/students"))).hasCause(new RuntimeException());
 	}
 }
