@@ -67,6 +67,14 @@ public class Student extends IDModel<Long> {
 		return classroom;
 	}
 
+	
+
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", lastName=" + lastName + ", sidiCode=" + sidiCode
+				+ ", taxCode=" + taxCode + ", classroom=" + classroom + "]";
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -75,46 +83,38 @@ public class Student extends IDModel<Long> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-
 		Student other = (Student) obj;
-
-		if (classroom == null && other.classroom != null) {
-			return false;
+		if (classroom == null) {
+			if (other.classroom != null)
+				return false;
 		} else if (!classroom.equals(other.classroom))
 			return false;
-
-		if (id == null && other.id != null) {
-			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
 		} else if (!id.equals(other.id))
 			return false;
-
-		if (lastName == null && other.lastName != null) {
-			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
-
-		if (name == null && other.name != null) {
-			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
 		} else if (!name.equals(other.name))
 			return false;
-
-		if (sidiCode == null && other.sidiCode != null) {
-			return false;
+		if (sidiCode == null) {
+			if (other.sidiCode != null)
+				return false;
 		} else if (!sidiCode.equals(other.sidiCode))
 			return false;
-
-		if (taxCode == null && other.taxCode != null) {
-			return false;
+		if (taxCode == null) {
+			if (other.taxCode != null)
+				return false;
 		} else if (!taxCode.equals(other.taxCode))
 			return false;
-
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", lastName=" + lastName + ", sidiCode=" + sidiCode
-				+ ", taxCode=" + taxCode + ", classroom=" + classroom + "]";
 	}
 
 }
