@@ -86,7 +86,7 @@ public class ClassroomControllerTest {
 		Student s1 = new Student(1L, "AAA", "AAA", "sidi1", "tax1", null);
 		Student s2 = new Student(2L, "UUU", "BBB", "sidi2", "tax2", null);
 		Student s3 = new Student(3L, "CCC", "BBB", "sidi3", "tax3", null);
-		List<Student> expectedStudents = Arrays.asList(s1, s3, s2);
+		List<Student> expectedStudents = Arrays.asList(s1, s2, s3);
 		Classroom classroom = new Classroom();
 		classroom.setStudents(new ArrayList<Student>(Arrays.asList(s1, s2, s3)));
 		
