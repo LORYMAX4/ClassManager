@@ -3,5 +3,5 @@ node_modules/
 .next/
 *.md
 package-lock.json
-database_data/
+data/
 
