@@ -2,7 +2,6 @@ package it.plansoft.classmanager.controller;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,12 +36,7 @@ public class ClassroomController {
 	@GetMapping("/{id}/students")
 	public List<Student> getStudentsByClass(@PathVariable Long id) {
 		Classroom c = service.findById(id).orElseThrow(() -> new RuntimeException());
-
-		return c.getStudents().stream()
-				.sorted((a, b) -> a.getLastName().compareTo(b.getLastName()) != 0
-						? a.getLastName().compareTo(b.getLastName())
-						: a.getName().compareTo(b.getName()))
-				.collect(Collectors.toList());
+		return c.getStudents();
 	}
 
 	@GetMapping("/search")

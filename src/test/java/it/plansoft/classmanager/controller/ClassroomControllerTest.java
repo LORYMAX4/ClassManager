@@ -9,8 +9,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,7 +88,7 @@ public class ClassroomControllerTest {
 		Student s3 = new Student(3L, "CCC", "BBB", "sidi3", "tax3", null);
 		List<Student> expectedStudents = Arrays.asList(s1, s3, s2);
 		Classroom classroom = new Classroom();
-		classroom.setStudents(new HashSet<Student>(Arrays.asList(s1, s2, s3)));
+		classroom.setStudents(new ArrayList<Student>(Arrays.asList(s1, s2, s3)));
 		
 		when(this.service.findById(id)).thenReturn(Optional.of(classroom));
 		MvcResult mvcResult = mvc.perform(get("/classroom/" + id + "/students")).andExpect(status().isOk())
