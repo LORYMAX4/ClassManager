@@ -1,9 +1,7 @@
 package it.plansoft.classmanager.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,7 +16,7 @@ import it.plansoft.classmanager.model.Student;
 import it.plansoft.classmanager.service.ClassroomService;
 
 @RestController
-@CrossOrigin()
+@CrossOrigin
 @RequestMapping("/classroom")
 public class ClassroomController {
 
@@ -38,12 +36,11 @@ public class ClassroomController {
 	@GetMapping("/{id}/students")
 	public List<Student> getStudentsByClass(@PathVariable Long id) {
 		Classroom c = service.findById(id).orElseThrow(() -> new RuntimeException());
-		return new ArrayList<Student>(c.getStudents());
+		return c.getStudents();
 	}
 
 	@GetMapping("/search")
-	public Classroom getByClass(@RequestParam int grade, @RequestParam String name) {
-		return service.findByGradeName(grade, name).orElseThrow(() -> new RuntimeException());
-
+	public Optional<Classroom> getByGradeName(@RequestParam int grade, @RequestParam String name) {
+		return service.findByGradeName(grade, name);
 	}
 }

@@ -25,7 +25,7 @@ public class Classroom extends IDModel<Long> {
 	private String name;
 	@Column(name = "GRADE", nullable = false)
 	private int grade;
-	
+
 	@OneToMany(mappedBy = "classroom")
 	@JsonIgnore
 	private List<Student> students;
@@ -57,4 +57,45 @@ public class Classroom extends IDModel<Long> {
 	public void setStudents(List<Student> students) {
 		this.students = students;
 	}
+	
+	@Override
+	public String toString() {
+		return "Classroom [id=" + id + ", name=" + name + ", grade=" + grade + ", students=" + students + "]";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		
+		Classroom other = (Classroom) obj;
+		
+		if (grade != other.grade)
+			return false;
+	
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		
+		if (students == null) {
+			if (other.students != null)
+				return false;
+		} else if (!students.equals(other.students))
+			return false;
+		
+		return true;
+	}
+
 }
