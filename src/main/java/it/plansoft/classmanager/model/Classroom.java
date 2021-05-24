@@ -1,6 +1,6 @@
 package it.plansoft.classmanager.model;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +28,7 @@ public class Classroom extends IDModel<Long> {
 	
 	@OneToMany(mappedBy = "classroom")
 	@JsonIgnore
-	private Set<Student> students;
+	private List<Student> students;
 
 	public Classroom() {
 	}
@@ -50,11 +50,11 @@ public class Classroom extends IDModel<Long> {
 		return grade;
 	}
 
-	public Set<Student> getStudents() {
+	public List<Student> getStudents() {
 		return students;
 	}
 
-	public void setStudents(Set<Student> students) {
+	public void setStudents(List<Student> students) {
 		this.students = students;
 	}
 }

@@ -1,8 +1,19 @@
+
+![plansoft-icon-1 (1)](https://user-images.githubusercontent.com/51908859/113130686-a16dcf80-921c-11eb-9e65-a0821a6aab71.png)
+
+# ClassManager
+
+**Data emissione** : 31 marzo 2021
+
 ## Indice
 - [Indice](#indice)
 - [Gruppo di lavoro](#gruppo-di-lavoro)
 - [Scopo del progetto](#scopo-del-progetto)
-- [Esecuzione con docker](#esecuzione-con-docker)
+- [Richieste implementative](#richieste-implementative)
+  - [Oggetti](#oggetti)
+- [Modello Entità Relazione](#modello-entità-relazione)
+- [Implementazione](#implementazione)
+  - [Tecnologie/Linguaggi utilizzati](#tecnologielinguaggi-utilizzati)
 - [Frontend](#frontend)
 	- [Esecuzione](#esecuzione)
 	- [Struttura e Componenti](#struttura-e-componenti)
@@ -14,62 +25,59 @@
 		- [Eliminazione Studente - Alert](#eliminazione-studente---alert)
 - [Backend](#backend)
 	- [Classi](#classi)
+- [Esecuzione con docker](#esecuzione-con-docker)
 
 ---
 
 ## Gruppo di lavoro
+
 - [PlanSoft](https://www.plansoft.it/) (Cliente e PM)
 - [Leonardo Morganti](https://github.com/Leomorga) (Sviluppatore)
 - [Leonardo Scrivere](https://github.com/scrivereleonardo) (Sviluppatore)
 - [Lorenzo Merlini](https://github.com/LORYMAX4) (Sviluppatore)
 
 ## Scopo del progetto
+
 Viene richiesta la creazione della parte di backend per la gestione degli studenti all'interno delle proprie classi. Le funzionalità che saranno implementate sono le seguenti:
 
 - Visualizzazione di tutti o di un singolo studente.
 - Inserimento, modifica e cancellazione di un determinato studente.
 - Visualizzazione di tutte o di una singola classe.
 
----
-## Esecuzione usando docker
+Ad ogni dipendente è associato: un id identificativo, nome, cognome, codice fiscale, SIDI_CODE e l’id identificativa della propria classe di appartenenza.
 
-1. Esecuzione del container mysql, sostituire <root> con il percorso assoluto al progetto:
+## Richieste implementative
 
-```Bash
-docker run -d --name classmanager_database -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -v <root>/src/main/docker/database:/docker-entrypoint-initdb.d -v <root>/data:/var/lib/mysql mysql
-```
+### Oggetti
 
-2. Appena il container db_classmanager è in stato di run possiamo eseguire la build del backend usando maven:
+Gli oggetti che dobbiamo trattare sono:
+- Studente(id, nome, cognome, codice fiscale, SIDI_CODE)
+- Classe(id, sezione, grado)
 
-```Bash
-mvn clean package
-```
+Inoltre gli oggetti sono collegati in questo modo:
+- Una classe è composta da più studenti.
 
-3. La build genera un file jar all'interno della directory target con il quale possiamo generare l'immagine del backend di classmanager:
+## Modello Entità Relazione
 
-```Bash
-docker build -t classmanager/backend . -f src/main/docker/backend/Dockerfile
-```
+![unnamed (2)](https://user-images.githubusercontent.com/51908859/113143311-480d9c80-922c-11eb-9d4f-23f16bc941a6.png)
 
-4. Generata l'immagine è possibile eseguirla generando la connessione con il database:
+Studente(id, nome, cognome, codice fiscale, SIDI_CODE, classroom)
 
-```Bash
-docker run -d --name classmanager_backend -p 8080:8080 --link=classmanager_database:localhost classmanager/backend
-```
+Classe(id, nome, grado)
 
-5. Creazione dell'immagine del frontend:
+## Implementazione
 
-```Bash
-docker build -t classmanager/frontend . -f src/main/docker/frontend/Dockerfile
-```
+### Tecnologie/Linguaggi utilizzati
 
-6. Esecuzione del container frontend:
-
-```Bash
-docker run -d --name classmanager_frontend -p 3000:3000 --link=classmanager_backend:localhost classmanager/frontend
-```
-
-A questo punto tutti i servizi sono collegati e accessibili.
+**Backend**
+- Java
+   - Linguaggio di programmazione utilizzato per lo sviluppo dell’applicazione tramite il framework Spring.
+- Spring
+  - Framework utilizzato per lo sviluppo di web application, quindi collegamento al database(MySql) ed esposizione delle API.
+- Maven
+  - Strumento utilizzato per facilitare la gestione delle dipendenze utilizzando il file pom.xml.
+- Postman
+  - Strumento utilizzato per verificare il corretto funzionamento delle API realizzate.
 
 ---
 
@@ -79,8 +87,6 @@ A questo punto tutti i servizi sono collegati e accessibili.
 
 Per eseguire l'applicazione frontend spostarsi nella direcotry `src/main/webapp/` ed eseguire il comando `npm run dev`.  
 L'applicazione è accessibile sulla porta `3000` all'indirizzo `http://localhost:3000/`.
-
-
 
 ```
 📦webapp
@@ -108,7 +114,6 @@ L'applicazione è accessibile sulla porta `3000` all'indirizzo `http://localhost
  ┃ ┗ 📜globals.css
  ┣ 📜package-lock.json
  ┗ 📜package.json
-
 ```
 
 ### Struttura e Componenti
@@ -238,3 +243,46 @@ Prima dell'eliminazione effettiva di uno studente vieni fatta una ichiesta di co
   name: "NEE"
 }
 ```
+
+---
+## Esecuzione usando docker
+
+1. Esecuzione del container mysql, sostituire <root> con il percorso assoluto al progetto:
+
+```Bash
+docker run -d --name classmanager_database -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -v <root>/src/main/docker/database:/docker-entrypoint-initdb.d -v <root>/data:/var/lib/mysql mysql
+```
+
+2. Appena il container db_classmanager è in stato di run possiamo eseguire la build del backend usando maven:
+
+```Bash
+mvn clean package
+```
+
+3. La build genera un file jar all'interno della directory target con il quale possiamo generare l'immagine del backend di classmanager:
+
+```Bash
+docker build -t classmanager/backend . -f src/main/docker/backend/Dockerfile
+```
+
+4. Generata l'immagine è possibile eseguirla generando la connessione con il database:
+
+```Bash
+docker run -d --name classmanager_backend -p 8080:8080 --link=classmanager_database:localhost classmanager/backend
+```
+
+5. Creazione dell'immagine del frontend:
+
+```Bash
+docker build -t classmanager/frontend . -f src/main/docker/frontend/Dockerfile
+```
+
+6. Esecuzione del container frontend:
+
+```Bash
+docker run -d --name classmanager_frontend -p 3000:3000 --link=classmanager_backend:localhost classmanager/frontend
+```
+
+A questo punto tutti i servizi sono collegati e accessibili.
+---
+##### [Torna all'indice](#indice)
