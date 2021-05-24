@@ -25,7 +25,7 @@
 		- [Eliminazione Studente - Alert](#eliminazione-studente---alert)
 - [Backend](#backend)
 	- [Classi](#classi)
-- [Esecuzione con docker](#esecuzione-con-docker)
+- [Esecuzione usando docker](#esecuzione-usando-docker)
 
 ---
 
@@ -284,5 +284,7 @@ docker run -d --name classmanager_frontend -p 3000:3000 --link=classmanager_back
 ```
 
 A questo punto tutti i servizi sono collegati e accessibili.
+	
 ---
+	
 ##### [Torna all'indice](#indice)
