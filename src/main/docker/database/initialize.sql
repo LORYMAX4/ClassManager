@@ -1,3 +1,7 @@
+create database classmanager;
+
+use classmanager;
+
 CREATE TABLE STUDENTS (
   ID INTEGER PRIMARY KEY AUTO_INCREMENT,
   NAME TEXT NOT NULL,

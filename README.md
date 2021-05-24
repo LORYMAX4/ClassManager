@@ -25,6 +25,7 @@
 		- [Eliminazione Studente - Alert](#eliminazione-studente---alert)
 - [Backend](#backend)
 	- [Classi](#classi)
+- [Esecuzione con docker](#esecuzione-con-docker)
 
 ---
 
@@ -77,7 +78,7 @@ Classe(id, nome, grado)
   - Strumento utilizzato per facilitare la gestione delle dipendenze utilizzando il file pom.xml.
 - Postman
   - Strumento utilizzato per verificare il corretto funzionamento delle API realizzate.
- 
+
 ---
 
 ## Frontend 
@@ -243,4 +244,45 @@ Prima dell'eliminazione effettiva di uno studente vieni fatta una ichiesta di co
 }
 ```
 
+---
+## Esecuzione usando docker
+
+1. Esecuzione del container mysql, sostituire <root> con il percorso assoluto al progetto:
+
+```Bash
+docker run -d --name classmanager_database -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -v <root>/src/main/docker/database:/docker-entrypoint-initdb.d -v <root>/data:/var/lib/mysql mysql
+```
+
+2. Appena il container db_classmanager è in stato di run possiamo eseguire la build del backend usando maven:
+
+```Bash
+mvn clean package
+```
+
+3. La build genera un file jar all'interno della directory target con il quale possiamo generare l'immagine del backend di classmanager:
+
+```Bash
+docker build -t classmanager/backend . -f src/main/docker/backend/Dockerfile
+```
+
+4. Generata l'immagine è possibile eseguirla generando la connessione con il database:
+
+```Bash
+docker run -d --name classmanager_backend -p 8080:8080 --link=classmanager_database:localhost classmanager/backend
+```
+
+5. Creazione dell'immagine del frontend:
+
+```Bash
+docker build -t classmanager/frontend . -f src/main/docker/frontend/Dockerfile
+```
+
+6. Esecuzione del container frontend:
+
+```Bash
+docker run -d --name classmanager_frontend -p 3000:3000 --link=classmanager_backend:localhost classmanager/frontend
+```
+
+A questo punto tutti i servizi sono collegati e accessibili.
+---
 ##### [Torna all'indice](#indice)
